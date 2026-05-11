@@ -1,11 +1,15 @@
 {
   "scripts": {
-    "fix": "prettier -w ."
+    "fix": "prettier -w .",
+    "lint": "eslint src/**/*.js && prettier --check ."
   },
   "dependencies": {
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0",
     "prettier": "^3.8.3"
   }
 }
