@@ -1,2 +1,4 @@
 # node環境で動かす
 node_modules/
+# 生成物の無視
+dist/

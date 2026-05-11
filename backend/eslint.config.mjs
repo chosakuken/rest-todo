@@ -18,5 +18,5 @@ export default defineConfig([
       semi: ["error", "always"],
       strict: ["error", "global"],
     },
-  }
+  },
 ]);
