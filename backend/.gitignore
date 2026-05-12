@@ -4,3 +4,5 @@ node_modules/
 dist/
 # 環境設定ファイル
 .env
+# データベース関連
+db/

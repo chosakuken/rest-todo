@@ -3,10 +3,12 @@
 require("dotenv").config();
 // セットアップ用関数
 const { setupExpress } = require("./config/express.js");
+const { setupDatabase } = require("./config/database.js");
 
 // 起動用コマンド
 const main = async () => {
   const app = setupExpress();
+  await setupDatabase();
   app.listen(process.env.PORT, () => {
     console.log("App listening on PORT:" + process.env.PORT);
   });
