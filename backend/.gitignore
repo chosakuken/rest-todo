@@ -2,3 +2,5 @@
 node_modules/
 # 生成物の無視
 dist/
+# 環境設定ファイル
+.env
