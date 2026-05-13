@@ -1,14 +1,17 @@
 "use strict";
-// モジュールのインポート
-const express = require("express");
-const { hoge } = require("./other/somefunc");
-const app = express();
+// .env ファイルの読み込み
+require("dotenv").config();
+// セットアップ用関数
+const { setupExpress } = require("./config/express.js");
+const { setupDatabase } = require("./config/database.js");
 
-app.get("/", (req, res) => {
-  console.log(hoge());
-  res.send("Hello World");
-});
-
-app.listen(3000, () => {
-  console.log("listening...");
-});
+// 起動用コマンド
+const main = async () => {
+  const app = setupExpress();
+  await setupDatabase();
+  app.listen(process.env.PORT, () => {
+    console.log("App listening on PORT:" + process.env.PORT);
+  });
+};
+// サーバーの起動
+main().catch(console.error);
