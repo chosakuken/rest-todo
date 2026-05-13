@@ -1,12 +1,42 @@
 "use strict";
 
-const { createTask } = require("../service/task");
+const { createTask, findOneTask } = require("../service/task");
 
 const taskRouter = require("express").Router();
 
 // 仮実装
 taskRouter.get("/", (req, res) => {
   res.send("Taskテーブルからデータが取れる予定");
+});
+
+taskRouter.get("/:id", async (req, res) => {
+  // 今回は try-catch で握りつぶしているが
+  // 本来はこのタイミングでのバリデーションが必要
+  try {
+    const resTask = await findOneTask(req.params.id);
+    if (!resTask) {
+      return res.status(404).send({
+        errors: [
+          {
+            status: 404,
+            type: "not found",
+            detail: "指定された id に対応するリソースが見つかりません",
+          },
+        ],
+      });
+    }
+    res.status(200).send(resTask.toJSON());
+  } catch (e) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          type: "bad request",
+          detail: e,
+        },
+      ],
+    });
+  }
 });
 
 taskRouter.post("/", async (req, res) => {

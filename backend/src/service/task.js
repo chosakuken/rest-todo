@@ -12,4 +12,14 @@ async function createTask({ name, detail = "", deadline }) {
   });
 }
 
-module.exports = { createTask };
+async function findOneTask(id) {
+  // このタイミングでもバリデーションが要ります
+  // 1つのデータの探索
+  const task = await Task.findByPk(id);
+  if (!task) {
+    return null;
+  }
+  return task;
+}
+
+module.exports = { createTask, findOneTask };
