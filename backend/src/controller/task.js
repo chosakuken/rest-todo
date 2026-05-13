@@ -5,6 +5,7 @@ const {
   findOneTask,
   findAllTask,
   deleteTask,
+  updateTask,
 } = require("../service/task");
 
 const taskRouter = require("express").Router();
@@ -71,6 +72,23 @@ taskRouter.post("/", async (req, res) => {
       deadline: req.body.deadline,
     });
     return res.status(200).send(createdData.toJSON());
+  } catch (e) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          type: "bad request",
+          detail: e,
+        },
+      ],
+    });
+  }
+});
+
+taskRouter.patch("/:id", async (req, res) => {
+  try {
+    const updateData = await updateTask(req.params.id, req.body);
+    return res.status(200).json(updateData);
   } catch (e) {
     return res.status(400).send({
       errors: [

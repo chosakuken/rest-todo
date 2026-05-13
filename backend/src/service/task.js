@@ -34,6 +34,26 @@ async function findAllTask({ done }) {
   return await Task.findAll();
 }
 
+async function updateTask(id, { name, detail, deadline } = {}) {
+  // 更新用データの作成 (他FWだとdtoで一発)
+  const updateData = {};
+  if (name) {
+    updateData.name = name;
+  }
+  if (detail) {
+    updateData.detail = detail;
+  }
+  if (deadline) {
+    updateData.deadline = deadline;
+  }
+  // 更新
+  return await Task.update(updateData, {
+    where: {
+      id: id,
+    },
+  });
+}
+
 async function deleteTask(id) {
   return await Task.destroy({
     where: {
@@ -42,4 +62,10 @@ async function deleteTask(id) {
   });
 }
 
-module.exports = { createTask, findOneTask, findAllTask, deleteTask };
+module.exports = {
+  createTask,
+  findOneTask,
+  findAllTask,
+  updateTask,
+  deleteTask,
+};
