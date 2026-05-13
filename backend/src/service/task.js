@@ -1,7 +1,8 @@
 "use strict";
 const { Task } = require("../models/task");
 
-async function createTask({ name, detail="", deadline }) {
+async function createTask({ name, detail = "", deadline }) {
+  // このタイミングでもバリデーションが要ります
   // データの作成
   return await Task.create({
     name: name,
