@@ -1,12 +1,12 @@
 "use strict";
 const express = require("express");
+const { rootRouter } = require("../controller/root");
 
 // アプリの実体を定義する
 const setupExpress = () => {
   const app = express();
-  app.get("/", (req, res) => {
-    res.send("Hello World");
-  });
+  // コントローラ定義
+  app.use("/", rootRouter);
   return app;
 };
 
