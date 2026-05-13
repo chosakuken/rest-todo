@@ -87,7 +87,6 @@ taskRouter.post("/", async (req, res) => {
 taskRouter.delete("/:id", async (req, res) => {
   try {
     const deletedRow = await deleteTask(req.params.id);
-    console.log("deleted");
     res.status(200).json(deletedRow);
   } catch (e) {
     return res.status(400).send({
