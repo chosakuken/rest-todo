@@ -22,4 +22,16 @@ async function findOneTask(id) {
   return task;
 }
 
-module.exports = { createTask, findOneTask };
+async function findAllTask({ done }) {
+  // フィルタが掛かっていない場合
+  if (done === "true" || done === "false") {
+    return await Task.findAll({
+      where: {
+        done: done === "true",
+      },
+    });
+  }
+  return await Task.findAll();
+}
+
+module.exports = { createTask, findOneTask, findAllTask };

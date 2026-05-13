@@ -1,12 +1,29 @@
 "use strict";
 
-const { createTask, findOneTask } = require("../service/task");
+const { createTask, findOneTask, findAllTask } = require("../service/task");
 
 const taskRouter = require("express").Router();
 
 // 仮実装
-taskRouter.get("/", (req, res) => {
-  res.send("Taskテーブルからデータが取れる予定");
+taskRouter.get("/", async (req, res) => {
+  try {
+    const resTasks = await findAllTask({
+      done: req.query.done,
+    });
+    return res.status(200).send({
+      tasks: resTasks,
+    });
+  } catch (e) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          type: "bad request",
+          detail: e,
+        },
+      ],
+    });
+  }
 });
 
 taskRouter.get("/:id", async (req, res) => {
