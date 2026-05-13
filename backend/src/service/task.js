@@ -34,4 +34,12 @@ async function findAllTask({ done }) {
   return await Task.findAll();
 }
 
-module.exports = { createTask, findOneTask, findAllTask };
+async function deleteTask(id) {
+  return await Task.destroy({
+    where: {
+      id: id,
+    },
+  });
+}
+
+module.exports = { createTask, findOneTask, findAllTask, deleteTask };
