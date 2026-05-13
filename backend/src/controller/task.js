@@ -5,6 +5,7 @@ const {
   findOneTask,
   findAllTask,
   deleteTask,
+  updateTask,
 } = require("../service/task");
 
 const taskRouter = require("express").Router();
@@ -84,10 +85,26 @@ taskRouter.post("/", async (req, res) => {
   }
 });
 
+taskRouter.patch("/:id", async (req, res) => {
+  try {
+    const updateData = await updateTask(req.params.id, req.body);
+    return res.status(200).json(updateData);
+  } catch (e) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          type: "bad request",
+          detail: e,
+        },
+      ],
+    });
+  }
+});
+
 taskRouter.delete("/:id", async (req, res) => {
   try {
     const deletedRow = await deleteTask(req.params.id);
-    console.log("deleted");
     res.status(200).json(deletedRow);
   } catch (e) {
     return res.status(400).send({
