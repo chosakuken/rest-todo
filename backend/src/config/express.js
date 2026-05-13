@@ -1,12 +1,15 @@
 "use strict";
 const express = require("express");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 const { rootRouter } = require("../controller/root");
 const { taskRouter } = require("../controller/task");
 
 // アプリの実体を定義する
 const setupExpress = () => {
   const app = express();
+  // POST 経由でメソッドを上書きできるように
+  app.use(methodOverride("_method"));
   // リクエストボディの取得
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
