@@ -1,9 +1,11 @@
 # rest-todo/backend
 
 ## 概要
+
 rest-todo アプリのバックエンド部
 
 ## ディレクトリ構成
+
 ```console
 .
 ├── .env # 環境設定ファイル (非追跡)
@@ -23,6 +25,7 @@ rest-todo アプリのバックエンド部
 ```
 
 ## 起動方法
+
 ```bash
 # 本ディレクトリに移動した後
 $ cp .env.template .env # 環境設定ファイルのコピー
