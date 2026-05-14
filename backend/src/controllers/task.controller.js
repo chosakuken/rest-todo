@@ -6,7 +6,7 @@ const {
   findAllTask,
   deleteTask,
   updateTask,
-} = require("../service/task");
+} = require("../services/task.service");
 
 const taskRouter = require("express").Router();
 
