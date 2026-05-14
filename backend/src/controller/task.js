@@ -16,19 +16,9 @@ taskRouter.get("/", async (req, res) => {
     const resTasks = await findAllTask({
       done: req.query.done,
     });
-    return res.status(200).send({
-      tasks: resTasks,
-    });
+    return res.status(200).json(resTasks);
   } catch (e) {
-    return res.status(400).send({
-      errors: [
-        {
-          status: 400,
-          type: "bad request",
-          detail: e,
-        },
-      ],
-    });
+    return res.status(400).json(e);
   }
 });
 
@@ -38,27 +28,13 @@ taskRouter.get("/:id", async (req, res) => {
   try {
     const resTask = await findOneTask(req.params.id);
     if (!resTask) {
-      return res.status(404).send({
-        errors: [
-          {
-            status: 404,
-            type: "not found",
-            detail: "指定された id に対応するリソースが見つかりません",
-          },
-        ],
+      return res.status(404).json({
+        error: "指定された id に対応するリソースが存在しません",
       });
     }
-    res.status(200).send(resTask.toJSON());
+    res.status(200).json(resTask);
   } catch (e) {
-    return res.status(400).send({
-      errors: [
-        {
-          status: 400,
-          type: "bad request",
-          detail: e,
-        },
-      ],
-    });
+    return res.status(400).json(e);
   }
 });
 
@@ -71,17 +47,9 @@ taskRouter.post("/", async (req, res) => {
       detail: req.body.detail,
       deadline: req.body.deadline,
     });
-    return res.status(200).send(createdData.toJSON());
+    return res.status(200).json(createdData);
   } catch (e) {
-    return res.status(400).send({
-      errors: [
-        {
-          status: 400,
-          type: "bad request",
-          detail: e,
-        },
-      ],
-    });
+    return res.status(400).json(e);
   }
 });
 
@@ -90,15 +58,7 @@ taskRouter.patch("/:id", async (req, res) => {
     const updateData = await updateTask(req.params.id, req.body);
     return res.status(200).json(updateData);
   } catch (e) {
-    return res.status(400).send({
-      errors: [
-        {
-          status: 400,
-          type: "bad request",
-          detail: e,
-        },
-      ],
-    });
+    return res.status(400).json(e);
   }
 });
 
@@ -107,15 +67,7 @@ taskRouter.delete("/:id", async (req, res) => {
     const deletedRow = await deleteTask(req.params.id);
     res.status(200).json(deletedRow);
   } catch (e) {
-    return res.status(400).send({
-      errors: [
-        {
-          status: 400,
-          type: "bad request",
-          detail: e,
-        },
-      ],
-    });
+    return res.status(400).json(e);
   }
 });
 
