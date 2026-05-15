@@ -25,40 +25,7 @@
       </a>
     </header>
     <main class="container mt-1">
-      <div
-        class="container p-1 m-1 border rounded d-flex justify-content-between"
-      >
-        <div>
-          <h3 class="mb-1">{{ task.name }}</h3>
-          <h4>{{ task.deadline }}</h4>
-          <details>
-            <summary>タスク詳細を表示</summary>
-            <p class="mt-1 ms-2 mb-0">{{ task.detail }}</p>
-          </details>
-        </div>
-        <div class="my-auto">
-          <a
-            href="/detail?id={{ task.id }}"
-            class="btn btn-light"
-            aria-label="詳細設定"
-          >
-            <i class="fa-solid fa-ellipsis fa-3x"></i>
-          </a>
-          <form action="/?id={{task.id}}" method="post" style="display: inline">
-            <button
-              type="submit"
-              class="btn-done btn btn-success"
-              aria-label="undone"
-            >
-              <i class="fa-regular fa-circle-check fa-3x"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-      {% endfor %}
-      <details class="mt-4">
-        <summary class="mb-2">完了済みのタスクを表示する</summary>
-        {% for task in doneTasks %}
+      <template>
         <div
           class="container p-1 m-1 border rounded d-flex justify-content-between"
         >
@@ -71,14 +38,55 @@
             </details>
           </div>
           <div class="my-auto">
-            <form action="/?id={{ task.id }}" method="post">
-              <button class="btn-done btn btn-danger" aria-label="未完了にする">
-                <i class="fa-regular fa-circle-xmark fa-3x"></i>
+            <a
+              href="/detail?id={{ task.id }}"
+              class="btn btn-light"
+              aria-label="詳細設定"
+            >
+              <i class="fa-solid fa-ellipsis fa-3x"></i>
+            </a>
+            <form
+              action="/?id={{task.id}}"
+              method="post"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="btn-done btn btn-success"
+                aria-label="undone"
+              >
+                <i class="fa-regular fa-circle-check fa-3x"></i>
               </button>
             </form>
           </div>
         </div>
-        {% endfor %}
+      </template>
+      <details class="mt-4">
+        <summary class="mb-2">完了済みのタスクを表示する</summary>
+        <template>
+          <div
+            class="container p-1 m-1 border rounded d-flex justify-content-between"
+          >
+            <div>
+              <h3 class="mb-1">{{ task.name }}</h3>
+              <h4>{{ task.deadline }}</h4>
+              <details>
+                <summary>タスク詳細を表示</summary>
+                <p class="mt-1 ms-2 mb-0">{{ task.detail }}</p>
+              </details>
+            </div>
+            <div class="my-auto">
+              <form action="/?id={{ task.id }}" method="post">
+                <button
+                  class="btn-done btn btn-danger"
+                  aria-label="未完了にする"
+                >
+                  <i class="fa-regular fa-circle-xmark fa-3x"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </template>
       </details>
       <div class="container p-1 m-1 d-flex flex-row-reverse">
         <a href="/create" class="btn btn-success my-auto d-flex">
