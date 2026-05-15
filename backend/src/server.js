@@ -3,7 +3,7 @@
 require("dotenv").config();
 // セットアップ用関数
 const { setupExpress } = require("./config/express.js");
-const { setupDatabase } = require("./config/database.js");
+const { setupDatabase } = require("./config/sequelize.js");
 
 // 起動用コマンド
 const main = async () => {

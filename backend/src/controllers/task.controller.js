@@ -46,6 +46,7 @@ taskRouter.post("/", async (req, res) => {
       name: req.body.name,
       detail: req.body.detail,
       deadline: req.body.deadline,
+      done: false, // タスク作成時に完了していることはない
     });
     return res.status(200).json(createdData);
   } catch (e) {

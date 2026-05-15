@@ -1,14 +1,14 @@
 "use strict";
 const { Task } = require("../models/task.model");
 
-async function createTask({ name, detail = "", deadline }) {
+async function createTask({ name, detail = "", deadline, done }) {
   // このタイミングでもバリデーションが要ります
   // データの作成
   return await Task.create({
     name: name,
     detail: detail,
     deadline: deadline,
-    done: false,
+    done: done,
   });
 }
 
@@ -34,17 +34,20 @@ async function findAllTask({ done }) {
   return await Task.findAll();
 }
 
-async function updateTask(id, { name, detail, deadline } = {}) {
+async function updateTask(id, { name, detail, deadline, done } = {}) {
   // 更新用データの作成 (他FWだとdtoで一発)
   const updateData = {};
-  if (name) {
+  if (name !== undefined) {
     updateData.name = name;
   }
-  if (detail) {
+  if (detail !== undefined) {
     updateData.detail = detail;
   }
-  if (deadline) {
+  if (deadline !== undefined) {
     updateData.deadline = deadline;
+  }
+  if (done !== undefined) {
+    updateData.done = done;
   }
   // 更新
   return await Task.update(updateData, {
