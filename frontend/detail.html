@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>タスク詳細画面</title>
+    <!-- bootstrap を導入 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <!-- FontAwesome を導入 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <header class="container-fluid text-bg-primary p-2">
+      <a href="/">
+        <h1 class="text-light">ToDoアプリ</h1>
+      </a>
+    </header>
+    <main class="container mt-1">
+      <div class="d-flex justify-content-between">
+        <h2 class="my-3">タスク更新・削除</h2>
+        <form action="/delete?id={{ task.id }}" method="post" class="my-auto">
+          <button
+            type="submit"
+            class="btn btn-danger my-auto d-flex"
+            aria-label="delete"
+          >
+            <i class="fa-solid fa-trash fa-2x"></i>
+          </button>
+        </form>
+      </div>
+      <form
+        action="/detail?id={{ task.id }}"
+        method="post"
+        class="container border rounded"
+      >
+        <label for="name" class="form-label mt-2">タスク名</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="タスク名"
+          name="name"
+          value="/need_update: タスク名"
+          required
+        />
+        <label for="input-detail" class="form-label mt-2">タスク詳細</label>
+        <textarea class="form-control" rows="5" id="input-detail" name="detail">
+/need_update: タスク詳細</textarea
+        >
+        <label for="deadline" class="form-label mt-2">期限</label>
+        <input
+          type="datetime-local"
+          id="deadline"
+          name="deadline"
+          value="/need_update: deadline"
+          class="form-control"
+          required
+        />
+        <div class="container p-1 m-1 d-flex flex-row-reverse">
+          <button
+            type="submit"
+            class="btn btn-success mx-2 my-auto d-flex"
+            aria-label="btn-update"
+          >
+            <i class="fa-solid fa-arrow-rotate-left fa-2x"></i>
+          </button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

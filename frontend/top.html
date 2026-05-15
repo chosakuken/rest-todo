@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ToDoアプリ</title>
+    <!-- bootstrap を導入 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <!-- FontAwesome を導入 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <header class="container-fluid text-bg-primary p-2">
+      <a href="/">
+        <h1 class="text-light">ToDoアプリ</h1>
+      </a>
+    </header>
+    <main class="container mt-1">
+      <template>
+        <div
+          class="container p-1 m-1 border rounded d-flex justify-content-between"
+        >
+          <div>
+            <h3 class="mb-1">{{ task.name }}</h3>
+            <h4>{{ task.deadline }}</h4>
+            <details>
+              <summary>タスク詳細を表示</summary>
+              <p class="mt-1 ms-2 mb-0">{{ task.detail }}</p>
+            </details>
+          </div>
+          <div class="my-auto">
+            <a
+              href="/detail?id={{ task.id }}"
+              class="btn btn-light"
+              aria-label="詳細設定"
+            >
+              <i class="fa-solid fa-ellipsis fa-3x"></i>
+            </a>
+            <form
+              action="/?id={{task.id}}"
+              method="post"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="btn-done btn btn-success"
+                aria-label="undone"
+              >
+                <i class="fa-regular fa-circle-check fa-3x"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </template>
+      <details class="mt-4">
+        <summary class="mb-2">完了済みのタスクを表示する</summary>
+        <template>
+          <div
+            class="container p-1 m-1 border rounded d-flex justify-content-between"
+          >
+            <div>
+              <h3 class="mb-1">{{ task.name }}</h3>
+              <h4>{{ task.deadline }}</h4>
+              <details>
+                <summary>タスク詳細を表示</summary>
+                <p class="mt-1 ms-2 mb-0">{{ task.detail }}</p>
+              </details>
+            </div>
+            <div class="my-auto">
+              <form action="/?id={{ task.id }}" method="post">
+                <button
+                  class="btn-done btn btn-danger"
+                  aria-label="未完了にする"
+                >
+                  <i class="fa-regular fa-circle-xmark fa-3x"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </template>
+      </details>
+      <div class="container p-1 m-1 d-flex flex-row-reverse">
+        <a href="/create" class="btn btn-success my-auto d-flex">
+          <h3>新規作成&nbsp;</h3>
+          <i class="fa-solid fa-plus fa-2x"></i>
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
