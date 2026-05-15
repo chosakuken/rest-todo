@@ -2,8 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const { rootRouter } = require("../controller/root");
-const { taskRouter } = require("../controller/task");
+const { rootRouter } = require("../controllers/root.controller");
+const { taskRouter } = require("../controllers/task.controller");
 
 // アプリの実体を定義する
 const setupExpress = () => {

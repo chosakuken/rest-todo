@@ -1,5 +1,5 @@
 "use strict";
-const { Task } = require("../models/task");
+const { Task } = require("../models/task.model");
 
 async function createTask({ name, detail = "", deadline }) {
   // このタイミングでもバリデーションが要ります
